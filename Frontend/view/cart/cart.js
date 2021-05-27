@@ -34,7 +34,7 @@ if (cartList.length === 0) {
     document.querySelector(".orderForm").style.display="none";
     document.querySelector(".emptyCart").innerHTML  +=  `
                                                         <h2 class = "emptyCart__headline">Votre panier est vide</h2>
-                                                        <a class = "emptyCart__backLink backToHomepageLink" href="http://127.0.0.1:5500/Frontend/view/homepage/index.html">Retour à l'accueil</a>
+                                                        <a class = "emptyCart__backLink backToHomepageLink" href="http://127.0.0.1:5500/index.html">Retour à l'accueil</a>
                                                         `
 };
 

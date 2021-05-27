@@ -1,4 +1,14 @@
 /*************************POLICES, MISE EN PAGE ET STYLES GLOBAUX*************************/
+@font-face {
+  font-family: 'belligerent_madnessregular';
+  src: url('./fonts/belligerentmadness_regular_macroman/belligerent-webfont.eot');
+  src: url('./fonts/belligerentmadness_regular_macroman/belligerent-webfont.woff') format('woff'),
+       url('./fonts/belligerentmadness_regular_macroman/belligerent-webfont.ttf') format('truetype'),
+       url('./fonts/belligerentmadness_regular_macroman/belligerent-webfont.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   height: 100%;
   font: 500 16px 'Roboto Mono', sans-serif;
@@ -312,7 +322,7 @@ label {
 
 .orderConfirmationHeader__logo {
   font-size: 6em;
-  font-family: 'Belligerent Madness';
+  font-family: 'belligerent_madnessregular';
   margin-top: 10px;
 }
 
@@ -339,7 +349,7 @@ label {
 }
 
 .logoTitle {
-  font-family: 'Belligerent Madness';
+  font-family: 'belligerent_madnessregular';
 }
 
 .backToHomepageLink {

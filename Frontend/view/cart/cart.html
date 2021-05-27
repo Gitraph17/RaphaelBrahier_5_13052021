@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../../style.css">
+
+    <script type="text/javascript" src="../../JS/productClass.js" defer></script>
+    <script type="text/javascript" src="../../JS/cartManager.js" defer></script>
+    <script type="text/javascript" src="../../JS/formManager.js" defer></script>
+    <script type="text/javascript" src="./cart.js" defer></script>
+    
+    <script src="https://kit.fontawesome.com/a7f7be9ef6.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto+Mono:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet"> 
+    <title>Votre panier - Orinoco Vintage Cameras</title>
+</head>
+<body>
+    <div class="blocPage">
+        <header class="siteHeader">
+            <a href="http://127.0.0.1:5500/Frontend/view/homepage/index.html"><img class="siteHeader__orinocoLogo" src="../../images/Orinoco-logo.jpg" /></a>
+            <img class="siteHeader__cameraIcon" src="https://img.icons8.com/dotty/80/000000/instant-camera.png"/>
+            <p class="siteHeader__productType">Vintage cameras</p>
+            <a href="http://127.0.0.1:5500/Frontend/view/cart/cart.html"><i class="siteHeader__shoppingCartIcon fas fa-shopping-cart"></i></a>
+        </header>
+
+        <main>
+            <section>
+                <h1 class="cartHeadline">Votre panier</h1>
+                <div class="emptyCart"></div>
+                <div class="cartContainer">
+                    <section class="cartListContainer"></section>
+                    <aside class="orderSummary"></aside>
+                </div>
+            </section>
+
+            <!--La validation par défaut du formulaire est désactivée avec l'attribut "novalidate" pour être gérée en JS-->
+            <form novalidate class="orderForm">
+                <h2 class="orderForm__Headline">Formulaire de commande</h2>
+                    <p>
+                        <label for="firstName">Prénom :</label>
+                        <input required pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$" minlength="2" maxlength="20" type="text" name="firstName" class="orderForm__input" id="orderForm__firstName" placeholder="Exemple : Paul" value=""/><span class="errorMessageContainer"></span>
+                    </p>    
+                    <p>
+                        <label for="lastName">Nom de famille :</label>
+                        <input required pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$" minlength="2" maxlength="20" type="text" name="lastName" class="orderForm__input" id="orderForm__lastName" placeholder="Exemple : Dupont"/><span class="errorMessageContainer"></span>
+                    </p>
+                    <p>
+                        <label for="address">Adresse :</label>
+                        <input required pattern="^[\w'\-,.][^_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"' minlength="3" maxlength="100" type="text" name="address" class="orderForm__input" id="orderForm__address" placeholder="Exemple : 12 Rue de l'église"/><span class="errorMessageContainer"></span>
+                    </p>
+            
+                    <p>
+                        <label for="postalCode">Code postal :</label>
+                        <input required pattern="[0-9]{5}" type="text" name="postalCode" class="orderForm__input" id="orderForm__postalCode" placeholder="Exemple : 75000" /><span class="errorMessageContainer"></span>
+                    </p>
+                    <p>
+                        <label for="city">Ville :</label>
+                        <input required pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$" minlength="1" maxlength="60" type="text" name="city" class="orderForm__input" id="orderForm__city" placeholder="Exemple : Paris"/><span class="errorMessageContainer"></span>
+                    </p>
+                    <p>
+                        <label for="email">Email :</label>
+                        <input required type="email" name="email" class="orderForm__input" id="orderForm__email" placeholder="Ex : pauldupont@gmail.com"/><span class="errorMessageContainer"></span>
+                    </p>
+                    <p>Pour soumettre votre commande veuillez remplir tous les champs ci-dessus.</p>
+                <input id="submitOrderBtn" type="submit" value="Valider ma commande" />
+            </form>
+        </main>
+    </div>
+
+    <footer>
+        <p><i class="far fa-copyright"></i> 2021 Orinoco - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

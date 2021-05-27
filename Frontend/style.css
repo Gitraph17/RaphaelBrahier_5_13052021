@@ -1,51 +1,493 @@
-body {
-    max-width: 1400px;
-    margin: auto;
+/*************************POLICES, MISE EN PAGE ET STYLES GLOBAUX*************************/
+html {
+  height: 100%;
+  font: 500 16px 'Roboto Mono', sans-serif;
 }
 
+h1,h2,h3 {
+  font-family: 'Lobster', cursive;
+  font-weight: lighter;
+}
 
+body {
+  min-height: 100%;
+  margin: 0;
+  padding-bottom: 140px;
+  position: relative;
+}
+
+a {
+  color:black;
+}
+
+.blocPage {
+  max-width: 1400px;
+  margin: auto;
+}
+
+button:hover {
+  cursor: pointer;
+}
+/*_______________________________________________________________________________________*/
+
+
+/******************************************HEADER*****************************************/
 .siteHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 4px solid black;
-    padding-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 10px solid ; 
+  padding-right: 10px;
 }
 
 .siteHeader__orinocoLogo {
-    height:80px;
-    margin-bottom: 5px;
+  height: 60px;
+}
+
+.siteHeader__cameraIcon {
+  width:50px;
+  margin-left: calc(50% - 348.34px);
+}
+
+.siteHeader__productType {
+  font-size: 1.8em;
+  font-style: italic;
+  margin-right:  calc(50% - 202.76px);
 }
 
 .siteHeader__shoppingCartIcon {
-    font-size: 2em;
+  font-size: 2em;
 }
+/*_______________________________________________________________________________________*/
 
-.productsList {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    height: 1900px;
-    align-content: space-between;
-}
 
-.camera {
-    width: 45%;
-    
-    margin: 20px;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px grey;
+/***************************COMMUN A TOUTES LES FICHES PRODUIT****************************/
+.productSheet { 
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px grey;
+  text-align: justify;
 }
 
 .camera__pic {
-    width:100%;
-    height:370px;
-    object-fit: cover;
+  width: 100%;
+  object-fit: cover;
+}
+/*_______________________________________________________________________________________*/
+
+
+/****************************************HOMEPAGE*****************************************/
+.homePageHeadline {
+  text-align: center;
+  font-size: 3em;
+  font-weight: lighter;
+  margin-top: 50px;
+}
+
+.productsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.homePageCamera {
+  width: 28%;
+  margin: 25px;
+  cursor: pointer;
+}
+
+.homePageCamera__pic {
+  height: 200px;
 }
 
 .camera__name,
 .camera__description,
-.camera__lenses,
 .camera__price {
-    padding-left: 15px;
+  padding: 0 15px;
 }
+/*_______________________________________________________________________________________*/
+
+/**************************************PAGE PRODUIT***************************************/
+.productPageCamera {
+  width: 60%;
+  margin: 70px auto 0 auto;
+  padding: 1px 0 15px 0;
+}
+
+.productPageCamera__pic {
+  height: 350px;
+}
+
+.camera__customization {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.addToCartButton {
+  margin: 15px 30%;
+  font: 1.5em 'Lobster';
+  height: 40px;
+  cursor: pointer;
+}
+
+/****************Boite modale****************/
+.modalContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+}
+  
+.modal {
+  text-align: center;
+  padding: 15px;
+  background-color: white;
+  margin: auto;
+  border-radius: 15px;
+}
+
+.modalBtn {
+  font: 1.25em 'Lobster';
+  border: 2px solid;
+  height: 40px;
+  margin: 10px auto;
+}
+/*__________________________________________*/
+/*_______________________________________________________________________________________*/
+
+
+/**************************************PAGE PANIER****************************************/
+.cartHeadline {
+  text-align: center;
+  font-size: 2em;
+  margin-top: 35px;
+}
+
+.cartContainer {
+  display:flex;
+  width:98%;
+  margin:auto;
+}
+
+.emptyCart {
+  text-align: center;
+  width: 300px;
+  margin:100px auto;
+}
+
+/***************Liste produits***************/
+.cartListContainer {
+  width: 75%;
+}
+  
+.cameraInCart {
+  display: flex;
+  height: 70px;
+  border: 2px solid;
+  margin-bottom: 10px;
+}
+
+.cameraInCart__pic {
+  width: 15%;
+  object-fit: cover;
+}
+
+.cameraInCartNameAndLenseContainer {
+  width: 47%;
+  background-color: #f2f2f2;
+}
+
+.cameraInCart__name,
+.cameraInCart__lense {
+  margin: 5px 20px 0px 15px;
+}
+
+.cameraInCart__name {
+  font-size: 1.3em;
+}
+
+.cameraInCartPriceAndQtyContainer {
+  width: 160px;
+  text-align: right;
+}
+  
+.cameraInCart__price {
+  margin: 5px 0 0 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.cameraInCart__quantity {
+  margin:0;
+}
+
+.cameraInCart__deleteBtn {
+  border: 3px solid;
+  font: italic 900 1em "Roboto Mono";
+  background-color: #f2f2f2;
+  margin: auto;
+}
+
+.cameraInCart__deleteBtn--mobilVersion {
+  display: none;
+}
+/*__________________________________________*/
+
+/************Aside(Récapitulatif)************/
+.orderSummary {
+  width: 25%;
+  height: 230px;
+  padding: 4px;
+  margin-left: 15px;
+  text-align: center;;
+  border: 2px solid;
+}
+
+.orderSummary__headline,
+.orderSummary__totalPriceHeadline {
+  font-size: 1.7em;
+  margin: 10px 0;
+}
+/*__________________________________________*/
+
+/*****************Formulaire*****************/
+input
+ {
+  width: 40%;
+  height: 30px;
+  border: 2px solid;
+  box-sizing: border-box;
+  padding-left: 10px;
+}
+
+label {
+  display: block;
+}
+
+.orderForm {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.orderForm > h2 {
+  margin: 0;
+}
+
+::placeholder {
+  font-family:'Roboto Mono';
+}
+
+.invalidInput { 
+  border: 2px solid red;
+}
+
+.errorMessageContainer {
+  display:block;
+  text-align: justify;
+  width: 40%;
+  margin: auto;
+  color:red;
+  font-style: italic;
+}
+
+#submitOrderBtn{
+  cursor: pointer;
+  margin: 20px 12.5% 0 12.5%;
+  width: 20%;
+  height: 40px;
+  font: 1.2em 'Lobster';
+}
+/*__________________________________________*/
+/*_______________________________________________________________________________________*/
+
+
+/*****************************PAGE CONFIRMATION DE COMMANDE*******************************/
+.orderConfirmationHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orderConfirmationHeader__logo {
+  font-size: 6em;
+  font-family: 'Belligerent Madness';
+  margin-top: 10px;
+}
+
+.orderConfirmationHeader__headline {
+  font: lighter 1.2em 'Roboto Mono', monospace;
+  margin-top: -15px;
+}
+
+.orderConfirmationContainer {
+  width: 50%;
+  margin: 5vh auto 0 auto;
+  text-align: center;
+  border: 8px solid;
+  box-shadow: 20px 20px 20px grey;
+}
+
+.orderConfirmationContainer > h1, h2,
+.seeYouSoon {
+  font: 2em 'Lobster';
+}
+
+.fa-smile-beam {
+  font-size: 2em;
+}
+
+.logoTitle {
+  font-family: 'Belligerent Madness';
+}
+
+.backToHomepageLink {
+  display: block;
+  text-align: center;
+  margin: 40px auto 0 auto;
+  color:black;
+  font-style: italic;
+}
+/*_______________________________________________________________________________________*/
+
+
+/****************************************FOOTER*******************************************/
+footer {
+  background-color:#cfcfcf;
+  width:100%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 13px;
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  right: 0;
+}
+
+footer > p {
+  margin:0;
+}
+/*_______________________________________________________________________________________*/
+
+
+/***************************************RESPONSIVE****************************************/
+/******************Tablette******************/
+@media screen and (max-width: 1024px) { 
+  .homePageCamera {
+    width:42%;
+  }
+
+  .addToCartButton {
+    width:70%;
+    margin: 20px 15%;
+  }
+
+  .cartContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cartListContainer {
+    width:98%;
+  }
+
+  .orderSummary {
+    width:70%;
+    height: auto;
+    margin-top: 30px;
+  }
+
+  input,
+  .errorMessage,
+  .orderConfirmationContainer
+  {
+  width: 85%;
+  }
+
+  #submitOrderBtn {
+    width: 54%;
+  }
+}
+/*__________________________________________*/
+
+
+/*******************Mobile*******************/
+@media screen and (max-width: 767px) { 
+  html {
+    font-size: 14px;
+  }
+
+  .homePageCamera {
+    width: 90%;
+  }
+
+  .siteHeader__orinocoLogo {
+    height: 45px
+  }
+
+  .siteHeader__productType{
+    display: none;
+  }
+
+  .siteHeader__cameraIcon {
+    width:35px;
+    position: absolute;
+    left: 345px;
+  }
+
+  .siteHeader__shoppingCartIcon {
+    font-size: 1.6em;
+}
+
+  .productPageCamera {
+    width: 90%;
+  }
+
+  .cameraInCart {
+    height:auto;
+  }
+
+  .cameraInCart__pic {
+    display: none;
+  }
+
+  .cameraInCartNameAndLenseContainer {
+    width: 100%;
+  }
+
+  .cameraInCartPriceAndQtyContainer {
+    min-width:50px;
+    margin: 5px;
+  }
+
+  .cameraInCart__deleteBtn {
+    display:none;
+  }
+
+  .cameraInCart__deleteBtn--mobilVersion {
+    display: inline-block;
+    margin-top: 3px;
+    font-size: 1.4em;
+    background-color: white;
+    border:none;
+  }
+}
+/*_______________________________________________________________________________________*/
+
+
+/****************************DEFINITION DES BORDURES DEGRADEES****************************/ 
+/*(Ces propriétés sont placées en fin de code car la taille et la nature des bordures doivent être définies auparavant)*/
+input,
+.siteHeader,
+.modalBtn,
+.cameraInCart,
+.cameraInCart__deleteBtn,
+.orderSummary,
+.orderConfirmationContainer {
+  border-image: linear-gradient(280deg, #8f5bfe, #e68e08);
+  border-image-slice: 1;
+}
+/*_______________________________________________________________________________________*/

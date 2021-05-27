@@ -111,7 +111,7 @@ orderForm.addEventListener("submit", function(event) {
 // On sauvegarde cette réponse et le prix total dans le localStorage, puis on redirige vers la page confirmation de commande:
             localStorage.setItem("orderConfirmationDetails", JSON.stringify(orderConfirmationDetails));
             localStorage.setItem("totalPrice", totalPrice());
-            document.location.href="http://127.0.0.1:5500/Frontend/view/orderConfirmation/orderConfirmation.html";
+            document.location.href="../orderConfirmation/orderConfirmation.html";
         })
         .catch(function(error) {
             console.log(error)

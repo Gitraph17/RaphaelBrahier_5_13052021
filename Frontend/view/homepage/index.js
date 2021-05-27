@@ -26,7 +26,7 @@ fetch("http://localhost:3000/api/cameras")
 // Au clique, l'identifiant du produit cliqué est enrégistré dans le localStorage. 
                 localStorage.setItem("clickedCameraId", this.dataset.id);
 // L'utilisateur est redirigé vers la page product.html. 
-                document.location.href="http://127.0.0.1:5500/Frontend/view/product/product.html"; 
+                document.location.href="./Frontend/view/product/product.html"; 
             })
         })
     })

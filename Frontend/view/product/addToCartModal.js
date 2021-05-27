@@ -11,7 +11,7 @@ function modalShow() {
     document.body.appendChild(modalContainer);
     modalContainer.appendChild(modal);
     document.querySelector(".modal-goToCartBtn").addEventListener("click", function() {
-        document.location.href="http://127.0.0.1:5500/Frontend/view/cart/cart.html"; 
+        document.location.href="../cart/cart.html"; 
         modalClose();
     });
     document.querySelector(".modal-closeBtn").addEventListener("click", function() {

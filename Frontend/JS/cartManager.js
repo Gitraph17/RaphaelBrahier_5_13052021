@@ -40,7 +40,7 @@ function deleteButton (buttonsList) {
         buttonsList[i].addEventListener("click", function() {
             removeCameraFromCart(cartList[i]);
 // Après suppression la page est rafraichie pour mettre à jour le panier:
-            document.location.href="http://127.0.0.1:5500/Frontend/view/cart/cart.html";
+            document.location.href="./cart.html";
         })
     }
 }

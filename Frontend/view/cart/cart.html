@@ -6,7 +6,8 @@
     
     <link rel="stylesheet" href="../../style.css">
 
-    <script type="text/javascript" src="../../JS/productClass.js" defer></script>
+    <script type="text/javascript" src="../../JS/APIrequestsManager.js" defer></script>
+    <script type="text/javascript" src="../../JS/priceFormatting.js" defer></script>
     <script type="text/javascript" src="../../JS/cartManager.js" defer></script>
     <script type="text/javascript" src="../../JS/formManager.js" defer></script>
     <script type="text/javascript" src="./cart.js" defer></script>
@@ -19,7 +20,7 @@
 <body>
     <div class="blocPage">
         <header class="siteHeader">
-            <a href="../../../index.html"><img class="siteHeader__orinocoLogo" src="../../images/Orinoco-logo.jpg" /></a>
+            <a href="../homepage/index.html"><img class="siteHeader__orinocoLogo" src="../../images/Orinoco-logo.jpg" /></a>
             <img class="siteHeader__cameraIcon" src="https://img.icons8.com/dotty/80/000000/instant-camera.png"/>
             <p class="siteHeader__productType">Vintage cameras</p>
             <a href="../cart/cart.html"><i class="siteHeader__shoppingCartIcon fas fa-shopping-cart"></i></a>
@@ -50,7 +51,6 @@
                         <label for="address">Adresse :</label>
                         <input required pattern="^[\w'\-,.][^_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"' minlength="3" maxlength="100" type="text" name="address" class="orderForm__input" id="orderForm__address" placeholder="Exemple : 12 Rue de l'église"/><span class="errorMessageContainer"></span>
                     </p>
-            
                     <p>
                         <label for="postalCode">Code postal :</label>
                         <input required pattern="[0-9]{5}" type="text" name="postalCode" class="orderForm__input" id="orderForm__postalCode" placeholder="Exemple : 75000" /><span class="errorMessageContainer"></span>

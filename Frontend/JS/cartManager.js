@@ -8,7 +8,7 @@
         -Calcul de la quantité de produits dans le panier
 */
 
-function getCart(){
+function getCart() {
     let cartList = localStorage.getItem("cartList");
     if(cartList == null){
         return [];
@@ -17,17 +17,17 @@ function getCart(){
     }
 }
 
-function saveCartListToLocalStorage(cartList){
+function saveCartListToLocalStorage(cartList) {
     localStorage.setItem("cartList",JSON.stringify(cartList));
 }
 
-function addToCart(camera){
+function addToCart(camera) {
     let cartList = getCart();
     cartList.push(camera);
     saveCartListToLocalStorage(cartList);
 }
 
-function removeCameraFromCart(camera){
+function removeCameraFromCart(camera) {
     let cartList = getCart();
 /* Un produit est supprimé du panier grâce à la méthode filter qui renvoie un tableau avec uniquement les produits du panier 
 ayant un identifiant différent OU une option de personnalisation différente du produit que l'on souhaite supprimer*/
@@ -35,7 +35,7 @@ ayant un identifiant différent OU une option de personnalisation différente du
     saveCartListToLocalStorage(cartList);
 }
 
-function deleteButton (buttonsList) {
+function deleteButton(buttonsList) {
     for (let i = 0; i < buttonsList.length; i++) {
         buttonsList[i].addEventListener("click", function() {
             removeCameraFromCart(cartList[i]);

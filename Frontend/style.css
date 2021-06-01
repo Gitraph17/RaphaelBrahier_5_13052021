@@ -411,7 +411,7 @@ footer > p {
   }
 
   input,
-  .errorMessage,
+  .errorMessageContainer,
   .orderConfirmationContainer
   {
   width: 85%;

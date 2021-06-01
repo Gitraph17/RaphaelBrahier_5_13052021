@@ -2,7 +2,6 @@
 // Les atrributs de validation (pattern REGEX, min-length, max length...) sont placés dans le code HTML.
 
 let orderForm = document.querySelector(".orderForm");
-let submitOrderButton = document.getElementById("submitOrderBtn");
 
 // Chaque input est placé dans une variable pour simplifier la manipulation:
 let firstNameInput  = document.getElementById("orderForm__firstName");
@@ -40,45 +39,50 @@ let inputs = [
     },
 ];
 
-// Le bouton "submit" est désactivé jusqu'au remplissage correct de tous les champs du formulaire:
-submitOrderButton.disabled = true;
-submitOrderButton.style.cursor = "not-allowed";
+// FONCTION QUI AFFICHE LES MESSAGES PERSONNALISES POUR CHAQUE INPUT EN CAS DE SAISIE INVALIDE:
+// Au changement de valeur d'un champ, SI il est invalide ET non vide, on affiche le message associé au sein de l'élément HTML qui suit l'input (une balise "span").
+// SINON on retire le message d'erreur.
+function displayValidationInfos() {
+    for (let input of inputs) {
+        input.name.addEventListener("change", function(event){
+            event.preventDefault();
+        if ( ! event.target.validity.valid && input.name.value != "") {
+            input.name.nextElementSibling.innerHTML = `<i class="fas fa-exclamation-circle"></i>  ${input.validationInfo}`;
+            input.name.nextElementSibling.style.display = 'block';
+            input.name.className = "invalidInput";
+        }  else {
+            input.name.nextElementSibling.style.display = "none";
+            input.name.classList.remove("invalidInput");
+        }
+        })
+    };
+}
 
-// Un écouteur d'évenement "changement de valeur" est attribué à chaque champ du formulaire:
-for (let input of inputs) {
-    input.name.addEventListener("change", function(event){
-        event.preventDefault();
-// Au changement de valeur du champ, SI il est invalide ET non vide, on affiche le message d'erreur associé dans l'élément HTML qui suit l'input (une balise "span"):
-    if ( ! event.target.validity.valid && input.name.value != "") {
-        input.name.nextElementSibling.innerHTML = `<i class="fas fa-exclamation-circle"></i>  ${input.validationInfo}`;
-        input.name.nextElementSibling.style.display = 'block';
-        input.name.className = "invalidInput";
-// SINON on retire le message d'erreur:
-    }  else {
-        input.name.nextElementSibling.style.display = "none";
-        input.name.classList.remove("invalidInput");
+// FONCTION D'ACTIVATION DU BOUTON DE SOUMISSION DU FORMULAIRE:
+// Le bouton est initialisé comme étant désactivé.
+// A chaque saisie utilisateur, SI la longeur de la liste des champs invalides est nulle, alors le bouton est activé.
+// SINON le bouton reste inactivé. 
+function activateSubmitBtn() {
+    let submitOrderButton = document.getElementById("submitOrderBtn");
+    submitOrderButton.disabled = true;
+    submitOrderButton.style.cursor = "not-allowed";
+    for (let input of inputs) {
+        input.name.addEventListener("input", function() {
+        let invalidInputs = document.querySelectorAll(":invalid");
+        if (invalidInputs.length === 0) {
+            submitOrderButton.disabled = false;
+            submitOrderButton.style.cursor = "pointer";
+        } else {
+            submitOrderButton.disabled = true;
+            submitOrderButton.style.cursor = "not-allowed";
+        }
+        })
     }
-// A chaque changement de valeur d'un champ, on dénombre les champs invalides:
-    let invalidInputs = document.querySelectorAll(":invalid");
-// SI aucun champ n'est invalide, le bouton "submit" est activé:
-    if (invalidInputs.length === 0) {
-        submitOrderButton.disabled = false;
-        submitOrderButton.style.cursor = "pointer";
-// SINON le bouton "submit" reste désactivé:
-    } else {
-        submitOrderButton.disabled = true;
-        submitOrderButton.style.cursor = "not-allowed";
-    }
-    })
 };
 
-// Tableau servant à contenir les identifiants des produits commandés:
-let products = [];
-
-// Ecoute de l'événement soumission du formulaire: 
-orderForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-// Un objet "contact" est crée avec les valeurs saisies par l'utilisateur:
+// Fonction de création d'un objet "contact" avec les valeurs saisies par l'utilisateur:
+// (Fonction appellée à la soumission du formulaire)
+function createContactObject() {
     let contact = {
         firstName:  firstNameInput.value,
         lastName:   lastNameInput.value,
@@ -86,34 +90,39 @@ orderForm.addEventListener("submit", function(event) {
         city:       cityInput.value,
         email:      emailInput.value
     }
-// Les identifiants des produits commandés par l'utilisateur sont ajouté au tableau "products":
+    return contact;
+}
+
+// Fonction de création d'un tableau qui contient les identifiants des produits commandés:
+// (Fonction appellée à la soumission du formulaire)
+function createProductIdsArray() {
+    let products = [];
     let cartList = JSON.parse(localStorage.getItem("cartList"));
     for (product of cartList) {
         products.push(product.id);
     }
-// "contact" et "products" sont regroupées dans un seul objet qui est envoyé à l'API: 
-    let toSend = {contact, products};
-    fetch('http://localhost:3000/api/cameras/order', {
-        method: 'POST',
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(toSend),
-        })
-        .then(function(response) {
-            if(response.ok) {
-                return response.json();
-            }
-         })
-// L'API répond en retournant l'objet contact, le tableau de produits et un identifiant de commande:
-        .then(function(orderConfirmationDetails){
-// On sauvegarde cette réponse et le prix total dans le localStorage, puis on redirige vers la page confirmation de commande:
-            localStorage.setItem("orderConfirmationDetails", JSON.stringify(orderConfirmationDetails));
+    return products;
+}
+
+// GESTION DES INTERACTIONS A LA SOUMISSION DU FORMULAIRE:
+// A la soumission, un objet contact et un tableau des produits commandés est crée. 
+// Ces données sont envoyées à l'API (fonction créee dans le fichier "APIrequestsManager.js").
+// L'API répond en retournant l'objet contact, le tableau de produits et un identifiant de commande.
+// On stocke cette réponse et le prix total dans le localStorage, puis on redirige vers la page confirmation de commande.
+function submitOrder() {
+    orderForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        let contact = createContactObject();
+        let products = createProductIdsArray();
+        sendOrderDatas(JSON.stringify({contact, products})).then ((serverResponse) => {
+            localStorage.setItem("orderConfirmationDetails", JSON.stringify(serverResponse));
             localStorage.setItem("totalPrice", totalPrice());
             document.location.href="../orderConfirmation/orderConfirmation.html";
         })
-        .catch(function(error) {
-            console.log(error)
-        })
-});
+    })
+};
+
+// Appel des fonctions crées:
+displayValidationInfos ()
+activateSubmitBtn ()
+submitOrder()

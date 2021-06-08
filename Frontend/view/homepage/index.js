@@ -3,7 +3,7 @@
 // Cette fonction crée une structure HTML pour chaque objet d'une liste reçue en argument:
 function createProductVisualsFromList(cameraList) {
     for(let item of cameraList){
-        let productListContainer = document.querySelector(".productsList");
+        const productListContainer = document.querySelector(".productsList");
         productListContainer.innerHTML +=`
                                             <article class="camera homePageCamera productSheet" data-id=${item._id}>
                                                 <h2 class="camera__name">${item.name}</h2>

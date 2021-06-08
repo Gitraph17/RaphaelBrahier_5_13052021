@@ -151,6 +151,7 @@ button:hover {
 }
   
 .modal {
+  max-width: 600px;
   text-align: center;
   padding: 15px;
   background-color: white;
@@ -395,6 +396,10 @@ footer > p {
     margin: 20px 15%;
   }
 
+  .modal {
+    max-width: 400px;
+  }
+
   .cartContainer {
     flex-direction: column;
     align-items: center;
@@ -454,6 +459,10 @@ footer > p {
 
   .productPageCamera {
     width: 90%;
+  }
+
+  .modal {
+    max-width: 260px;
   }
 
   .cameraInCart {

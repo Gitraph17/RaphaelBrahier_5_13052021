@@ -59,9 +59,9 @@
                         <label for="city">Ville :</label>
                         <input required pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$" minlength="1" maxlength="60" type="text" name="city" class="orderForm__input" id="orderForm__city" placeholder="Exemple : Paris"/><span class="errorMessageContainer"></span>
                     </p>
-                    <p>
+                    <p> 
                         <label for="email">Email :</label>
-                        <input required type="email" name="email" class="orderForm__input" id="orderForm__email" placeholder="Ex : pauldupont@gmail.com"/><span class="errorMessageContainer"></span>
+                        <input required pattern="^[\w\-.]+@([\w-]+\.)+[\w-]{2,3}$"  name="email" class="orderForm__input" id="orderForm__email" placeholder="Ex : pauldupont@gmail.com"/><span class="errorMessageContainer"></span>
                     </p>
                     <p>Pour soumettre votre commande veuillez remplir tous les champs ci-dessus.</p>
                 <input id="submitOrderBtn" type="submit" value="Valider ma commande" />

@@ -3,7 +3,7 @@
 // REQUETE DE TYPE "GET" POUR RECUPERER LES DONNES SUR LES PRODUITS 
 // Cette fonction asynchrone prend en argument l'URL de l'API cible.
 // Si la requête HTTP est bien effectuée une promesse est reçue. La variable "response" contient cette promesse lorsqu'elle est résolue sous forme d'objet "Response".
-// SI la réponse indique un succès de cette requête (response.ok: true), alors on retourne le contenu de la réponse en tant qu’objet JSON.
+// SI la réponse indique un succès de cette requête (response.ok: true), alors on retourne le contenu de la réponse en tant qu’objet Javascript avec la méthode .json().
 // SINON (si "response.ok" vaut "false") le statut de l'érreur est affiché dans la console.
 // Si la requête HTTP n’a pas pu être effectuée l'erreur est affichée dans la console via l'instruction "catch".
 async function getProductsDatas(apiUrl) {

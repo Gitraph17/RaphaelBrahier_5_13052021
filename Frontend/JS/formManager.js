@@ -1,29 +1,29 @@
 // GESTION DU FORMULAIRE DE COMMANDE: AFFICHAGE DES MESSAGES DE SAISIE INVALIDE, VALIDATION, ENVOI DE LA COMMANDE AU SERVEUR
 // Les atrributs de validation (pattern REGEX, min-length, max length...) sont placés dans le code HTML.
 
-let orderForm = document.querySelector(".orderForm");
+const orderForm = document.querySelector(".orderForm");
 
 // Chaque input est placé dans une variable pour simplifier la manipulation:
-let firstNameInput  = document.getElementById("orderForm__firstName");
-let lastNameInput   = document.getElementById("orderForm__lastName");
-let addressInput    = document.getElementById("orderForm__address");
-let postalCodeInput = document.getElementById("orderForm__postalCode");
-let cityInput       = document.getElementById("orderForm__city");
-let emailInput      = document.getElementById("orderForm__email");
+const firstNameInput  = document.getElementById("orderForm__firstName");
+const lastNameInput   = document.getElementById("orderForm__lastName");
+const addressInput    = document.getElementById("orderForm__address");
+const postalCodeInput = document.getElementById("orderForm__postalCode");
+const cityInput       = document.getElementById("orderForm__city");
+const emailInput      = document.getElementById("orderForm__email");
 
 // Création d'un tableau d'objets pour associer à chaque input un message d'erreur personnalisé:
-let inputs = [
+const inputs = [
     {
         name: firstNameInput,
-        validationInfo: "Le prénom doit être composé de 2 à 20 caractères, chiffres et symboles spéciaux ne sont pas acceptés.",
+        validationInfo: "Le prénom doit être composé de 3 à 20 caractères, chiffres et symboles spéciaux ne sont pas acceptés.",
     },
     {
         name: lastNameInput,
-        validationInfo: "Le nom de famille doit être composé de 2 à 20 caractères, chiffres et symboles spéciaux ne sont pas acceptés.",
+        validationInfo: "Le nom de famille doit être composé de 3 à 20 caractères, chiffres et symboles spéciaux ne sont pas acceptés.",
     },
     {
         name: addressInput,
-        validationInfo: "L'adresse doit être composée de 3 à 100 caractères, les symboles spéciaux ne sont pas acceptés.",
+        validationInfo: "L'adresse doit être composée de 4 à 100 caractères, les symboles spéciaux ne sont pas acceptés.",
     },
     {
         name: postalCodeInput,
@@ -31,7 +31,7 @@ let inputs = [
     },
     {
         name: cityInput,
-        validationInfo: "Le nom de votre ville doit être composé de 1 à 30 caractères, chiffres et symboles spéciaux ne sont pas acceptés.",
+        validationInfo: "Le nom de votre ville doit être composé de 3 à 30 caractères, chiffres et symboles spéciaux ne sont pas acceptés.",
     },
     {
         name: emailInput,
@@ -45,7 +45,6 @@ let inputs = [
 function displayValidationInfos() {
     for (let input of inputs) {
         input.name.addEventListener("change", function(event){
-            event.preventDefault();
         if ( ! event.target.validity.valid && input.name.value != "") {
             input.name.nextElementSibling.innerHTML = `<i class="fas fa-exclamation-circle"></i>  ${input.validationInfo}`;
             input.name.nextElementSibling.style.display = 'block';
@@ -63,7 +62,7 @@ function displayValidationInfos() {
 // A chaque saisie utilisateur, SI la longeur de la liste des champs invalides est nulle, alors le bouton est activé.
 // SINON le bouton reste inactivé. 
 function activateSubmitBtn() {
-    let submitOrderButton = document.getElementById("submitOrderBtn");
+    const submitOrderButton = document.getElementById("submitOrderBtn");
     submitOrderButton.disabled = true;
     submitOrderButton.style.cursor = "not-allowed";
     for (let input of inputs) {

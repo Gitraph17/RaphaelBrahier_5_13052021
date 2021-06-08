@@ -18,6 +18,8 @@ function createProductVisualAndCustomMenus(cameraToDisplay) {
                                                         <option value=1>1</option>
                                                         <option value=2>2</option>
                                                         <option value=3>3</option>
+                                                        <option value=4>4</option>
+                                                        <option value=5>5</option>
                                                     </select>
                                                 </form>
                                                 <input type="submit" class="addToCartButton" value="Ajouter au panier">`
@@ -26,9 +28,30 @@ function createProductVisualAndCustomMenus(cameraToDisplay) {
     }
 }
 
+// L'appareil photo à comparer a t'il le même identifiant, la même configuration de lentille et la même quantité séléctionnée qu'un appareil déja présent dans le panier ?
+function isSameIdLenseQty (camToCompare) {
+    let cartList = getCart();
+    for (let i = 0; i < cartList.length; i++) {
+        if (cartList[i].id === camToCompare.id && cartList[i].selectedLense === camToCompare.selectedLense && cartList[i].selectedQuantity === camToCompare.selectedQuantity) {
+            return true;
+        }
+    }
+}
+
+// L'appareil photo à comparer a t'il le même identifiant et la même configuration de lentille mais une quantité séléctionnée différente d'un appareil déja présent dans le panier ?
+function isQtyChanged (camToCompare) {
+    let cartList = getCart();
+    for (let i = 0; i < cartList.length; i++) {
+        if (cartList[i].id === camToCompare.id && cartList[i].selectedLense === camToCompare.selectedLense && cartList[i].selectedQuantity != camToCompare.selectedQuantity) {
+            return true;
+        }
+    }
+}
+
 // FONCTION GERANT LES INTERACTIONS AU CLIQUE SUR LE BOUTON "AJOUTER AU PANIER".
 // Au clique un objet est créee avec ses différentes propriétés, la quantité et l'option choisie par l'utilisateur.
-// SI la liste du panier contient déja un produit identique (même Id ET même option de personnalisation) alors rien ne se passe.
+// SI la liste du panier contient déja un produit identique (même Id ET même option de personnalisation) dans une quantité séléctionnée identique, on informe l'utilisateur via la boite modale que ce produit à déja été ajouté et on lui précise ce qu'il peut faire.
+// SINON SI la liste du panier contient déja un produit identique (même Id ET même option de personnalisation), mais que la quantité séléctionnée diffère on remplace le produit dans le localStorage pour prendre en compte la modification de quantité et on en informe l'utilisateur via la boite modale.
 // SINON l'objet est ajouté à la liste du panier et sauvegardé dans le localStorage (fonction créée dans le fichier "cartManager.js").
 // Finalement, une boite modale apparait pour confirmer à l'utilisateur son ajout du produit au panier (fonction créée dans le fichier "addToCartModal.js").
 function addToCartBtnInteraction (cameraToBuy) {
@@ -40,16 +63,27 @@ function addToCartBtnInteraction (cameraToBuy) {
             id : clickedCameraId,
             selectedLense: document.querySelector(".selectLense").value,
             selectedQuantity: document.querySelector(".selectQuantity").value,
-        }  
-        let cartList = getCart();
-        if (cartList.find(camera => camera.id === clickedCameraId) && cartList.find(camera => camera.selectedLense === document.querySelector(".selectLense").value)) {
+        }
+        if (isSameIdLenseQty(cameraAddedToCart)) {
+            modal.innerHTML += `<p>L'appareil photo ${cameraToBuy.name} à déjà été ajouté au panier avec une lentille et une quantité identique à la séléction actuelle.</p>
+                                    <p>Vous pouvez ajouter le même modèle avec une lentille différente, modifier la quantité séléctionnée, ou supprimer ce produit en vous rendant sur la page "Panier".</p>
+                                    <button class="modalBtn modal-goToCartBtn">Voir mon panier</button>
+                                    <button class="modalBtn modal-closeBtn">Retour à la fiche du produit</button>`;
+            modalShow();
+        } else if (isQtyChanged(cameraAddedToCart)) {
+            modal.innerHTML += `La quantité séléctionnée à bien étée modifiée pour ce produit.</p>
+                                    <button class="modalBtn modal-goToCartBtn">Voir mon panier</button>
+                                    <button class="modalBtn modal-closeBtn">Retour à la fiche du produit</button>`;
+            modalShow();
+            removeCameraFromCart(cameraAddedToCart);
+            addToCart(cameraAddedToCart);
         } else {
             addToCart(cameraAddedToCart);
+            modal.innerHTML += `<p>L'appareil photo ${cameraToBuy.name} à été ajouté au panier !</p>
+            <button class="modalBtn modal-goToCartBtn">Voir mon panier</button>
+            <button class="modalBtn modal-closeBtn">Retour à la fiche du produit</button>`;
+            modalShow();
         }
-        modal.innerHTML += `<p>L'appareil photo ${cameraToBuy.name} à été ajouté au panier !</p>
-                            <button class="modalBtn modal-goToCartBtn">Voir mon panier</button>
-                            <button class="modalBtn modal-closeBtn">Retour à la fiche du produit</button>`;
-        modalShow();
     })
 }
 
